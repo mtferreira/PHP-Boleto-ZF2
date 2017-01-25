@@ -17,7 +17,7 @@ Instalação
      ```json
      {
            "prefer-stable": true,
-           "minimum-stability": "dev"
+           "minimum-stability": "dev",
            "require": {
              "mtferreira/php-boleto-zf2": "dev-master"
          }
