@@ -16,9 +16,10 @@ Instalação
 
      ```json
      {
-         "minimum-stability": "dev",
-         "require": {
-             "jotjunior/boletophp-zf2": "dev-master"
+           "prefer-stable": true,
+           "minimum-stability": "dev"
+           "require": {
+             "mtferreira/php-boleto-zf2": "dev-master"
          }
      }
      ```
