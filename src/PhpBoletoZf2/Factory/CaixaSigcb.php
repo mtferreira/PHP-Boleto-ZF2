@@ -29,6 +29,7 @@ class CaixaSigcb extends AbstractBoletoFactory
 {
 
     protected $codigoBanco = '104';
+    protected $nossoNumero = '14000000';
 
     public function prepare()
     {
@@ -91,8 +92,8 @@ class CaixaSigcb extends AbstractBoletoFactory
         /**
          * Formatando o Nosso Número para impressão
          */
-        $nossoNumeroFormatado = '24000000' . $nossoNumeroProcessado;
-        $nossoNumeroFormatado = $nossoNumeroFormatado . Util::digitoVerificadorNossoNumero($nossoNumeroFormatado);
+        $nossoNumeroFormatado = $this->nossoNumero . $nossoNumeroProcessado;
+        $nossoNumeroFormatado = $nossoNumeroFormatado . Util::digitoVerificadorNossoNumero($nossoNumeroFormatado) .'-'.$nossoNumeroDV;
         
         
 
@@ -102,8 +103,6 @@ class CaixaSigcb extends AbstractBoletoFactory
         $this->getCedente()->setAgenciaCodigo($this->getCedente()->getAgencia()
                 . ' / '
                 . $this->getCedente()->getContaCedente()
-                . '-'
-                . $this->getCedente()->getContaCedenteDv()
         );
 
         /**
