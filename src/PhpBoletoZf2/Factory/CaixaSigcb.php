@@ -44,6 +44,7 @@ class CaixaSigcb extends AbstractBoletoFactory
          */
         $nossoNumeroProcessado = \str_pad($this->getBoleto()->getNossoNumero(), 9, '0', STR_PAD_LEFT);
         $nossoNumeroDV = Util::digitoVerificadorNossoNumero($this->getBoleto()->getNossoNumero());
+        $nossoNumeroDV = $nossoNumeroDV == "P"? "0" : $nossoNumeroDV;
 
         /**
          * Calcula o fator do vencimento (número inteiro que representa a data de vencimento na linha digitavel)
@@ -93,7 +94,7 @@ class CaixaSigcb extends AbstractBoletoFactory
          * Formatando o Nosso Número para impressão
          */
         $nossoNumeroFormatado = $this->nossoNumero . $nossoNumeroProcessado;
-        $nossoNumeroFormatado = $nossoNumeroFormatado . Util::digitoVerificadorNossoNumero($nossoNumeroFormatado) .'-'.$nossoNumeroDV;
+        $nossoNumeroFormatado = $nossoNumeroFormatado . Util::digitoVerificadorNossoNumero($nossoNumeroFormatado) . '-' . $nossoNumeroDV;
         
         
 
