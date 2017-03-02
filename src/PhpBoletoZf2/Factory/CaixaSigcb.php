@@ -31,6 +31,44 @@ class CaixaSigcb extends AbstractBoletoFactory
     protected $codigoBanco = '104';
     protected $nossoNumero = '14000000';
 
+    /**
+     * @return string
+     */
+    public function getCodigoBanco()
+    {
+        return $this->codigoBanco;
+    }
+
+    /**
+     * @param string $codigoBanco
+     * @return CaixaSigcb
+     */
+    public function setCodigoBanco($codigoBanco)
+    {
+        $this->codigoBanco = $codigoBanco;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNossoNumero()
+    {
+        return $this->nossoNumero;
+    }
+
+    /**
+     * @param string $nossoNumero
+     * @return CaixaSigcb
+     */
+    public function setNossoNumero($nossoNumero)
+    {
+        $this->nossoNumero = $nossoNumero;
+
+        return $this;
+    }
+
     public function prepare()
     {
 
