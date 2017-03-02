@@ -29,6 +29,45 @@ class CaixaSigcb extends AbstractBoletoFactory
 {
 
     protected $codigoBanco = '104';
+    protected $nossoNumero = '14000000';
+
+    /**
+     * @return string
+     */
+    public function getCodigoBanco()
+    {
+        return $this->codigoBanco;
+    }
+
+    /**
+     * @param string $codigoBanco
+     * @return CaixaSigcb
+     */
+    public function setCodigoBanco($codigoBanco)
+    {
+        $this->codigoBanco = $codigoBanco;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNossoNumero()
+    {
+        return $this->nossoNumero;
+    }
+
+    /**
+     * @param string $nossoNumero
+     * @return CaixaSigcb
+     */
+    public function setNossoNumero($nossoNumero)
+    {
+        $this->nossoNumero = $nossoNumero;
+
+        return $this;
+    }
 
     public function prepare()
     {
@@ -43,6 +82,7 @@ class CaixaSigcb extends AbstractBoletoFactory
          */
         $nossoNumeroProcessado = \str_pad($this->getBoleto()->getNossoNumero(), 9, '0', STR_PAD_LEFT);
         $nossoNumeroDV = Util::digitoVerificadorNossoNumero($this->getBoleto()->getNossoNumero());
+        $nossoNumeroDV = $nossoNumeroDV == "P"? "0" : $nossoNumeroDV;
 
         /**
          * Calcula o fator do vencimento (número inteiro que representa a data de vencimento na linha digitavel)
@@ -91,8 +131,8 @@ class CaixaSigcb extends AbstractBoletoFactory
         /**
          * Formatando o Nosso Número para impressão
          */
-        $nossoNumeroFormatado = '24000000' . $nossoNumeroProcessado;
-        $nossoNumeroFormatado = $nossoNumeroFormatado . Util::digitoVerificadorNossoNumero($nossoNumeroFormatado);
+        $nossoNumeroFormatado = $this->nossoNumero . $nossoNumeroProcessado;
+        $nossoNumeroFormatado = $nossoNumeroFormatado . Util::digitoVerificadorNossoNumero($nossoNumeroFormatado) . '-' . $nossoNumeroDV;
         
         
 
@@ -102,8 +142,6 @@ class CaixaSigcb extends AbstractBoletoFactory
         $this->getCedente()->setAgenciaCodigo($this->getCedente()->getAgencia()
                 . ' / '
                 . $this->getCedente()->getContaCedente()
-                . '-'
-                . $this->getCedente()->getContaCedenteDv()
         );
 
         /**
