@@ -131,8 +131,10 @@ class CaixaSigcb extends AbstractBoletoFactory
         /**
          * Formatando o Nosso Número para impressão
          */
+
         $nossoNumeroFormatado = $this->nossoNumero . $nossoNumeroProcessado;
-        $nossoNumeroFormatado = $nossoNumeroFormatado . Util::digitoVerificadorNossoNumero($nossoNumeroFormatado) . '-' . $nossoNumeroDV;
+        $digitoNossoNumero = Util::digitoVerificadorNossoNumero($nossoNumeroFormatado) == 'P'? 0 :  Util::digitoVerificadorNossoNumero($nossoNumeroFormatado);
+        $nossoNumeroFormatado = $nossoNumeroFormatado . $digitoNossoNumero . '-' . $nossoNumeroDV;
         
         
 
