@@ -27,7 +27,7 @@ use PhpBoletoZf2\Lib\Util;
 
 class CaixaSigcb extends AbstractBoletoFactory
 {
-
+    protected $codigoBanco = '104';
     /**
      * @return string
      */
