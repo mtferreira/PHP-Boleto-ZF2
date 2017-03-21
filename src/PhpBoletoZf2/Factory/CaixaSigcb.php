@@ -28,9 +28,6 @@ use PhpBoletoZf2\Lib\Util;
 class CaixaSigcb extends AbstractBoletoFactory
 {
 
-    protected $codigoBanco = '104';
-    protected $nossoNumero = '14000000';
-
     /**
      * @return string
      */
@@ -50,25 +47,6 @@ class CaixaSigcb extends AbstractBoletoFactory
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getNossoNumero()
-    {
-        return $this->nossoNumero;
-    }
-
-    /**
-     * @param string $nossoNumero
-     * @return CaixaSigcb
-     */
-    public function setNossoNumero($nossoNumero)
-    {
-        $this->nossoNumero = $nossoNumero;
-
-        return $this;
-    }
-
     public function prepare()
     {
 
@@ -80,6 +58,9 @@ class CaixaSigcb extends AbstractBoletoFactory
         /**
          * Compondo o Nosso Número e seu dígito verificador
          */
+
+        $nossonumero = str_pad($this->getCedente()->getCarteira(),8,0,STR_PAD_RIGHT);
+
         $nossoNumeroProcessado = \str_pad($this->getBoleto()->getNossoNumero(), 9, '0', STR_PAD_LEFT);
         $nossoNumeroDV = Util::digitoVerificadorNossoNumero($this->getBoleto()->getNossoNumero());
         $nossoNumeroDV = $nossoNumeroDV == "P"? "0" : $nossoNumeroDV;
@@ -132,9 +113,9 @@ class CaixaSigcb extends AbstractBoletoFactory
          * Formatando o Nosso Número para impressão
          */
 
-        $nossoNumeroFormatado = $this->nossoNumero . $nossoNumeroProcessado;
+        $nossoNumeroFormatado = $nossonumero . $nossoNumeroProcessado;
         $digitoNossoNumero = Util::digitoVerificadorNossoNumero($nossoNumeroFormatado) == 'P'? 0 :  Util::digitoVerificadorNossoNumero($nossoNumeroFormatado);
-        $nossoNumeroFormatado = $nossoNumeroFormatado . $digitoNossoNumero . '-' . $nossoNumeroDV;
+        $nossoNumeroFormatado = $nossoNumeroFormatado .  '-' . $digitoNossoNumero;
         
         
 
