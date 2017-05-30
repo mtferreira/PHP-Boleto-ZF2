@@ -52,23 +52,23 @@ abstract class Util
      * @param string $sequencia:
      *          String de 21 dígitos contendo:
      *          - agencia cedente sem dígito verificador (4 dígitos)
-     *          - conta do cliente com digito verificador (10 dígitos)
+     *          - número do cliente(convenio) (10 dígitos)
      *          - nosso número (7 dígitos)
      * @param string $constante: constante pra validar
      * 
      * @return int $dv valor digito verificador 
      */
-    public static function digitoVerificadorNossoNumeroBancoob($sequencia, $constante) 
+    public static function digitoVerificadorNossoNumeroBancoob($sequencia, $constanteStr) 
     {
         $cont      = 0;
         $calculoDv = '';
 
         for ($num = 0; $num<=strlen($sequencia); $num++) {
-            for ($posConst=0;$posConst<strlen($contante);$posConst++) {
+            for ($posConst=0;$posConst<strlen($constanteStr);$posConst++) {
                 if ($cont==$posConst) {
-                    $constante = $contante[$posConst];
+                    $constante = $constanteStr[$posConst];
 
-                    if ($cont==strlen($contante)-1) {
+                    if ($cont==strlen($constanteStr)-1) {
                         $cont=0;
                     } else {                
                         $cont++;

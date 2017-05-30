@@ -27,8 +27,25 @@ use PhpBoletoZf2\Lib\Util;
 
 class CaixaSigcb extends AbstractBoletoFactory
 {
-
     protected $codigoBanco = '104';
+    /**
+     * @return string
+     */
+    public function getCodigoBanco()
+    {
+        return $this->codigoBanco;
+    }
+
+    /**
+     * @param string $codigoBanco
+     * @return CaixaSigcb
+     */
+    public function setCodigoBanco($codigoBanco)
+    {
+        $this->codigoBanco = $codigoBanco;
+
+        return $this;
+    }
 
     public function prepare()
     {
@@ -41,8 +58,12 @@ class CaixaSigcb extends AbstractBoletoFactory
         /**
          * Compondo o Nosso Número e seu dígito verificador
          */
+
+        $nossonumero = str_pad($this->getCedente()->getCarteira(),8,0,STR_PAD_RIGHT);
+
         $nossoNumeroProcessado = \str_pad($this->getBoleto()->getNossoNumero(), 9, '0', STR_PAD_LEFT);
         $nossoNumeroDV = Util::digitoVerificadorNossoNumero($this->getBoleto()->getNossoNumero());
+        $nossoNumeroDV = $nossoNumeroDV == "P"? "0" : $nossoNumeroDV;
 
         /**
          * Calcula o fator do vencimento (número inteiro que representa a data de vencimento na linha digitavel)
@@ -91,8 +112,10 @@ class CaixaSigcb extends AbstractBoletoFactory
         /**
          * Formatando o Nosso Número para impressão
          */
-        $nossoNumeroFormatado = '24000000' . $nossoNumeroProcessado;
-        $nossoNumeroFormatado = $nossoNumeroFormatado . Util::digitoVerificadorNossoNumero($nossoNumeroFormatado);
+
+        $nossoNumeroFormatado = $nossonumero . $nossoNumeroProcessado;
+        $digitoNossoNumero = Util::digitoVerificadorNossoNumero($nossoNumeroFormatado) == 'P'? 0 :  Util::digitoVerificadorNossoNumero($nossoNumeroFormatado);
+        $nossoNumeroFormatado = $nossoNumeroFormatado .  '-' . $digitoNossoNumero;
         
         
 
@@ -102,8 +125,6 @@ class CaixaSigcb extends AbstractBoletoFactory
         $this->getCedente()->setAgenciaCodigo($this->getCedente()->getAgencia()
                 . ' / '
                 . $this->getCedente()->getContaCedente()
-                . '-'
-                . $this->getCedente()->getContaCedenteDv()
         );
 
         /**

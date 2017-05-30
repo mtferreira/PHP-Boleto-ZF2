@@ -38,7 +38,6 @@ class Base64 extends Image
         
         imagedestroy($this->resource);
         imagedestroy($cropped);
-        
     }
 
 }
