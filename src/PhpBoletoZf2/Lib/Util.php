@@ -58,39 +58,34 @@ abstract class Util
      * 
      * @return int $dv valor digito verificador 
      */
-    public static function digitoVerificadorNossoNumeroBancoob($sequencia, $constanteStr) 
+    public static function digitoVerificadorNossoNumeroBancoob($sequencia, $constanteStr)
     {
-        $cont      = 0;
-        $calculoDv = '';
 
-        for ($num = 0; $num<=strlen($sequencia); $num++) {
-            for ($posConst=0;$posConst<strlen($constanteStr);$posConst++) {
-                if ($cont==$posConst) {
-                    $constante = $constanteStr[$posConst];
+        $tamanho = strlen($sequencia);
+        /* Constante fixa para Cálculo*/
+        $constanteStr = '319731973197319731973';
 
-                    if ($cont==strlen($constanteStr)-1) {
-                        $cont=0;
-                    } else {                
-                        $cont++;
-                    }    
-                    
-                    break;
-                }
-            }
+        $arrSequencia = str_split($sequencia);
+        $arrConstante = str_split($constanteStr);
+        $soma         = 0;
+        $resto        = 0;
 
-            $calculoDv = $calculoDv + (substr($sequencia,$num,1) * $constante);
+        $digitoVerificador = null;
+
+        for ($x = 0; $x <= $tamanho; $x++) {
+            $soma += ((int)$arrSequencia[$x] * (int)$arrConstante[$x]);
         }
 
-        $resto = $calculoDv % 11;
-        $dv   = 11 - $resto;
+        $resto = $soma % 11;
 
-        if ($dv == 0) $dv = 0;
-        if ($dv == 1) $dv = 0;
-        if ($dv > 9) $dv = 0;
+        if ($resto == 0 || $resto == 1) {
+            $digitoVerificador = 0;
+        } else {
+            $digitoVerificador = 11 - $resto;
+        }
 
-        return $dv;
+        return $digitoVerificador;
     }
-
     /**
      * Gera o dígito verificador do código de barras
      * @param int $numero
