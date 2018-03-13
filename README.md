@@ -19,7 +19,7 @@ Instalação
            "prefer-stable": true,
            "minimum-stability": "dev",
            "require": {
-             "mtferreira/php-boleto-zf2": "dev-master"
+             "versatecnologia/php-boleto-zf2": "dev-master"
          }
      }
      ```
