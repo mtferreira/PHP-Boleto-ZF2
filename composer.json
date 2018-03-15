@@ -4,7 +4,7 @@
     "description": "Adaptação do BoletoPHP para Zend Framework 2",
     "keywords": ["boleto", "php", "zf2"],
     "homepage": "http://phpboleto-zf2.jot.com.bt",
-    "license": "GNU General Public License ",
+    "license": "MIT",
     "authors": [
         {
             "name": "João G. Zanon Jr.",
