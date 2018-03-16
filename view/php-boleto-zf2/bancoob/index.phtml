@@ -3,7 +3,7 @@
     <head>
         <title><?php echo $this->dados->getCedente()->getIdentificacao(); ?></title>
         <meta http-equiv=Content-Type content=text/html charset="UTF-8"/>
-        <meta name="Generator" content="Projeto BoletoPHP - www.boletophp.com.br - Licença GPL" />	
+        <meta name="Generator" content="Projeto BoletoPHP - www.boletophp.com.br - Licença GPL" />
         <style type="text/css">
             .ti {font: 9px Arial, Helvetica, sans-serif}
         </style>
@@ -103,7 +103,7 @@
                 table.header td.linha_digitavel {
                     width: <?=$this->type == "pdf" ? "400" : "464"?>px;
                     text-align: right;
-                    font: bold 15px Arial; 
+                    font: bold 15px Arial;
                     color: black
                 }
                 table.line {
@@ -367,38 +367,39 @@
                 Use no lugar do <div id=""> caso queira imprimir sem o logotipo e instruções
                 <div id="instructions">
                 -->
-		
+
                     <div id="instr_content">
 
                         <h2>Instru&ccedil;&otilde;es</h2>
                         <ol>
                         <li>
-                            Imprima em impressora jato de tinta (ink jet) ou laser, em 
-                            qualidade normal ou alta. N&atilde;o use modo econ&ocirc;mico. 
+                            Imprima em impressora jato de tinta (ink jet) ou laser, em
+                            qualidade normal ou alta. N&atilde;o use modo econ&ocirc;mico.
                             <p class="notice">
                                 Por favor, configure margens esquerda e direitapara 17mm.
                             </p>
                         </li>
                         <li>
                             Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) e margens
-                            m&iacute;nimas &agrave; esquerda e &agrave; direita do 
+                            m&iacute;nimas &agrave; esquerda e &agrave; direita do
                             formul&aacute;rio.
                         </li>
                         <li>
-                            Corte na linha indicada. N&atilde;o rasure, risque, fure ou dobre 
+                            Corte na linha indicada. N&atilde;o rasure, risque, fure ou dobre
                             a regi&atilde;o onde se encontra o c&oacute;digo de barras
                         </li>
                         </ol>
-                                
+
                     </div>	<!-- id="instr_content" -->
-                
+
                 </div>	<!-- id="instructions" -->
-	
+
             <div id="boleto">
-                <div class="cut" id="instr_cut">
+                <div class="
+                " id="instr_cut">
                     <p>Corte na linha pontilhada</p>
                 </div>
-    		
+
                 <table class="header" border=0 cellspacing="0" cellpadding="0">
                     <tbody>
                         <tr>
@@ -427,7 +428,8 @@
 
                         <tr class="campos">
                             <td class="cedente"><?=$this->dados->getCedente()->getNomeCedente(); ?>&nbsp;</td>
-                            <td class="ag_cod_cedente"><?=$this->dados->getCedente()->getAgenciaCodigo()?> &nbsp;</td>
+                            <td class="ag_cod_cedente"><?= $this->dados->getCedente()->getAgencia() ?> /
+                                <?= $this->dados->getCedente()->getContaCedente() ?> &nbsp;</td>
                             <td class="especie"><?=$this->dados->getBanco()->getEspecie()?>&nbsp;</td>
                             <TD class="qtd"><?=$this->dados->getBoleto()->getQuantidade()?>&nbsp;</td>
                             <TD class="nosso_numero"><?=$this->dados->getBoleto()->getNossoNumeroFormatado()?>&nbsp;</td>
@@ -482,11 +484,11 @@
                         </tr>
                     </tbody>
                 </table>
-    
+
                 <div class="footer">
                     <p>Autentica&ccedil;&atilde;o mec&acirc;nica</p>
                 </div>
-            
+
                 <div class="instrucoes_1">
                     <?php echo $this->dados->getBoleto()->getInstrucoes1() ?>
                     <br />
@@ -496,7 +498,7 @@
                     <br />
                     <?php echo $this->dados->getBoleto()->getInstrucoes4() ?>
                 </div>
-    
+
                 <div class="cut">
                     <p>Corte na linha pontilhada</p>
                 </div>
@@ -527,7 +529,7 @@
                         </tr>
                     </tbody>
                 </table>
-    
+
                 <table class="line" cellspacing="0" cellpadding="0">
                     <tbody>
                         <tr class="titulos">
@@ -536,7 +538,8 @@
                         </tr>
                         <tr class="campos">
                             <td class="cedente2"><?=$this->dados->getCedente()->getNomeCedente()?></td>
-                            <td class="ag_cod_cedente2"><?=$this->dados->getCedente()->getAgenciaCodigo()?></td>
+                            <td class="ag_cod_cedente2"><?= $this->dados->getCedente()->getAgencia() ?> /
+                                <?= $this->dados->getCedente()->getContaCedente() ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -582,8 +585,8 @@
                         </tr>
                     </tbody>
                 </table>
-    
-    
+
+
                 <table class="line" cellspacing="0" cellpadding="0">
                     <tbody>
                         <tr>
@@ -610,7 +613,7 @@
                                 </table>
                             </td>
                         </tr>
-        
+
                         <tr>
                             <td>
                                 <table class="line" cellspacing="0" cellpadding="0">
@@ -625,7 +628,7 @@
                                 </table>
                             </td>
                         </tr>
-        
+
                         <tr>
                             <td>
                                 <table class="line" cellspacing="0" cellpadding="0">
@@ -687,8 +690,8 @@
                         </tr>
                     </tbody>
                 </table>
-    
-    
+
+
                 <table class="line" cellspacing="0" cellPadding="0">
                     <tbody>
                         <tr class="titulos">
@@ -702,8 +705,8 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>		
-    
+                </table>
+
                 <table class="line" cellspacing="0" cellpadding="0">
                     <tbody>
                         <tr class="titulos">
@@ -715,7 +718,7 @@
                             <td class="cod_baixa">&nbsp;</td>
                         </tr>
                     </tbody>
-                </table>		
+                </table>
 
                 <div class="footer">
                     <p>Autentica&ccedil;&atilde;o mec&acirc;nica</p>
